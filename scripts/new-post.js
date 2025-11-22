@@ -2,6 +2,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import chalk from "chalk-template";
 
 // function getDate() {
 //   const today = new Date()
@@ -28,18 +29,29 @@ if (!fileExtensionRegex.test(fileName)) {
 	fileName += ".md";
 }
 
-const targetDir = "./src/content/posts/";
-const fullPath = path.join(targetDir, fileName);
+const markdownDir = "./src/content/posts/";
+const assetsDir = "./public/assets/posts/";
+const markdownFullPath = path.join(markdownDir, fileName);
+const assetsDirFullPath = path.join(assetsDir, path.parse(fileName).name);
 
-if (fs.existsSync(fullPath)) {
-	console.error(`Error: File ${fullPath} already exists `);
+if (fs.existsSync(markdownFullPath)) {
+	console.error(`Error: File ${markdownFullPath} already exists `);
+	process.exit(1);
+}
+
+if (fs.existsSync(assetsDirFullPath)) {
+	console.error(`Error: Directory ${assetsDir} already exists `);
 	process.exit(1);
 }
 
 // recursive mode creates multi-level directories
-const dirPath = path.dirname(fullPath);
-if (!fs.existsSync(dirPath)) {
-	fs.mkdirSync(dirPath, { recursive: true });
+const markdownDirPath = path.dirname(markdownFullPath);
+if (!fs.existsSync(markdownDirPath)) {
+	fs.mkdirSync(markdownDirPath, { recursive: true });
+}
+
+if (!fs.existsSync(assetsDirFullPath)) {
+	fs.mkdirSync(assetsDirFullPath, { recursive: true });
 }
 
 const content = `---
@@ -47,6 +59,10 @@ title: ${args[0]}
 published: ${new Date().toISOString()}
 # updated:
 description: ''
+# prefix starts with '/' is relative to the 'public' folder (/images/banner.webp)
+# prefix starts with './' is relative to the markdown file (./cover.jpg)
+# prefix starts with '/' and './' is relative to the 'assets' folder (images/)
+# note: store images in 'public' folder will have SEO image benefits.
 image: ''
 tags: []
 category: ''
@@ -56,6 +72,12 @@ lang: 'id'
 ---
 `;
 
-fs.writeFileSync(path.join(targetDir, fileName), content);
+fs.writeFileSync(markdownFullPath, content);
 
-console.log(`Post ${fullPath} created`);
+let message = chalk`{underline {bold {#ffffff Markdown Post Generator}}}\n`;
+message += chalk`{#22c55e +} 📄 {#0ea5e9 ${markdownFullPath}} (markdown file 📖)\n`;
+message += chalk`{#22c55e +} 📁 {#0ea5e9 ${assetsDirFullPath}} (assets directory 🌄)\n\n`;
+message += chalk`{underline {bold {#ffffff Note}}}\n`;
+message += chalk`{italic Please store assets like images in the} {underline {bold {#0ea5e9 ${assetsDirFullPath}}}} {italic directory.}`;
+
+console.log(message);
