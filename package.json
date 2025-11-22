@@ -73,7 +73,8 @@
         "chalk-template": "^1.1.2",
         "daisyui": "^4.12.24",
         "postcss-import": "^16.1.1",
-        "postcss-nesting": "^13.0.2"
+        "postcss-nesting": "^13.0.2",
+        "sanitize-filename": "^1.6.3"
     },
     "packageManager": "pnpm@9.14.4"
 }
