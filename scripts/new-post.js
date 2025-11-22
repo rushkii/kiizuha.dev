@@ -3,15 +3,18 @@
 import fs from "node:fs";
 import path from "node:path";
 import chalk from "chalk-template";
+import sanitize from "sanitize-filename";
 
-// function getDate() {
-//   const today = new Date()
-//   const year = today.getFullYear()
-//   const month = String(today.getMonth() + 1).padStart(2, "0")
-//   const day = String(today.getDate()).padStart(2, "0")
-
-//   return `${year}-${month}-${day}`
-// }
+function toSafeName(str) {
+	return str
+		.normalize("NFKD") // normalize Unicode (handles accents)
+		.replace(/[\u0300-\u036f]/g, "") // remove accent marks
+		.replace(/[^a-zA-Z0-9\s_-]/g, "") // remove unsafe characters
+		.trim() // remove leading/trailing spaces
+		.replace(/\s+/g, "-") // replace multiple spaces with "-"
+		.replace(/-+/g, "-") // clean multiple "-"
+		.toLowerCase();
+}
 
 const args = process.argv.slice(2);
 
@@ -21,7 +24,8 @@ Usage: npm run new-post -- <filename>`);
 	process.exit(1); // Terminate the script and return error code 1
 }
 
-let fileName = args[0];
+const originalTitle = args[0];
+let fileName = toSafeName(sanitize(originalTitle));
 
 // Add .md extension if not present
 const fileExtensionRegex = /\.(md|mdx)$/i;
