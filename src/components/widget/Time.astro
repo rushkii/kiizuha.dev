@@ -1,0 +1,13 @@
+---
+import dayjs from "dayjs";
+
+interface Props {
+	time: Date;
+	class?: string | null;
+}
+const { time } = Astro.props;
+---
+
+<div class:list={["kz-tooltip", Astro.props.class]} data-tip={dayjs(time).format("MMM, DD YYYY HH:mm Z")}>
+    <slot>{dayjs(time).format("DD/MM/YYYY")}</slot>
+</div>
