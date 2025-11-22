@@ -6,8 +6,12 @@ interface Props {
 	class?: string | null;
 }
 const { time } = Astro.props;
+
+const parseTime = dayjs(time);
+const dateDetail = parseTime.format("MMM, DD YYYY at HH:mm Z");
+const displayDate = parseTime.format("DD/MM/YYYY");
 ---
 
-<div class:list={["kz-tooltip", Astro.props.class]} data-tip={dayjs(time).format("MMM, DD YYYY HH:mm Z")}>
-    <slot>{dayjs(time).format("DD/MM/YYYY")}</slot>
+<div class:list={["kz-tooltip", Astro.props.class]} data-tip={dateDetail}>
+    <slot>{displayDate}</slot>
 </div>
