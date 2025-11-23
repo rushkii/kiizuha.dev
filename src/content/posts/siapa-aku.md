@@ -1,14 +1,14 @@
 ---
 title: Siapa Aku? 🤔
 published: 2025-11-22T21:09:13.505Z
-# updated:
+updated: 2025-11-22T23:18:55.860Z
 description: 'Ingin tahu siapa aku?'
 # prefix starts with '/' is relative to the 'public' folder (/images/banner.webp)
 # prefix starts with './' is relative to the markdown file (./cover.jpg)
 # prefix starts with '/' and './' is relative to the 'assets' folder (images/)
 # note: store images in 'public' folder will have SEO image benefits.
-image: ''
-tags: ['programming', 'career']
+image: '/assets/posts/siapa-aku/office-friends.jpg'
+tags: ['Programming', 'Career']
 category: 'Personal'
 # set to false to publish
 draft: false
