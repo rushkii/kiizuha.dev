@@ -60,4 +60,60 @@ Setelah menyerah pada Python untuk mengejar role Backend, akhirnya aku memulai b
 hal baru terutama Frontend yang gimana caranya tampilan website itu bekerja pada layar
 user.
 
+#### Vue
+Jadi pertama kali aku belajar Frontend itu pake Vue, dulu masih Vue 2 klo ga salah,
+yang kodenya masih seperti
+```js title="App.vue"
+Vue.app({
+  data(): {
+    return {
+      name: 'Kizu'
+    }
+  },
+  methods: {
+    setName(value) {
+      this.data = value
+    }
+  },
+  render(): {
+    return (
+      <div>{this.data}</div>
+    )
+  }
+})
+```
+Wah, pokoknya pusing banget dah cara ngodingnya yang kayak gitu, belum ada sebulan langsung
+nyerah.
+
+#### React
+Lalu beberapa bulan kemudian kenal sama React, waktu belajar React langsung paham
+cara kerjanya dan semangat bikin simple UI dan data manipulation, sampai saat di mana aku stuck
+pas menggunakan `fetch()`:
+```tsx title="App.tsx"
+import { useState, useEffect } from 'react';
+
+const HelloWorld = () => {
+  const [data, setData] = useState()
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/todos/1')
+      .then(response => response.json())
+      .then(json => {
+        setData(json)
+      })
+  })
+
+  return (
+    <pre>
+      {JSON.stringify(data, null, 2)}
+    </pre>
+  )
+}
+```
+Ujung-ujungnya pusing juga cara set state yang masih pake .then(), karena dlu masih belum tau
+cara ngoding yang benar gimana di React, sekarang enak udah ada library data fetcher kyk
+Tanstack Query.
+
+#### Svelte
+
 ---
