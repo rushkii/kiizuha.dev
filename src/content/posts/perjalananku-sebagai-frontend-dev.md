@@ -1,13 +1,13 @@
 ---
 title: Perjalananku Sebagai Frontend Dev
 published: 2025-11-21T23:42:10.798Z
-# updated:
+updated: 2025-12-28T07:22:53.318Z
 description: 'Menceritakan bagaimana saya berkarir sebagai Frontend Developer'
 image: '/assets/posts/perjalananku-sebagai-frontend-dev/frontend-journey.webp'
 tags: ['Blog', 'Career']
 category: 'Programming'
 # set to false to publish
-draft: true
+draft: false
 lang: 'id'
 ---
 
@@ -115,5 +115,44 @@ cara ngoding yang benar gimana di React, sekarang enak udah ada library data fet
 Tanstack Query.
 
 #### Svelte
+Dulu kenal Svelte dari sebuah komunitas di Telegram, ada orang yang review tentang Svelte ini,
+di screenshot kodingan Svelte yang dia share yang ku lihat itu terlihatt simple banget sampai
+otakku berpikir "wah, kok syntaxnya simple banget ya berasa ngoding JS basic tutorial" kayak gini:
+```svelte title="App.svelte"
+<script>
+  let text = 'Hello '
+  text += 'World'
+</script>
+
+<div>{text}</div>
+```
+kayak..., ga mungkin kan simple banget kayak gitu? sampai dia kasih tau aku data manipulation
+ala slow rendering buat simulasi data fetching.
+```svelte title="App.svelte"
+<script>
+  import { onMount } from 'svelte'
+
+  let text = 'Hello '
+  
+  onMount(() => {
+    setTimeout(() => {
+      text += 'World'
+    }, 1000)
+  })
+</script>
+
+<div>{text}</div>
+```
+dan ya... render delay bekerja layaknya ngoding JavaScript seperti biasa.
+
+Setelah review Svelte dari komunitas Telegram, aku langsung paham dan langsung pilih Svelte
+sebagai project pribadi atau project hobi.
+
+Sekarang pun lebih enak dengan adanya Svelte Runes yang syntaxnya lebih enak dipahami, bahkan
+bisa pake syntax svelte di dalam file TypeScript atau JavaScript, caranya tinggal namain
+filenya dengan `.svelte.ts` atau `.svelte.js`. Biasanya content di file ini untuk data management,
+karena di situ lah business logic berada.
+
+Yang mau belajar Svelte bisa ke [__**svelte.docs**__](https://svelte.dev/docs) langsung.
 
 ---
